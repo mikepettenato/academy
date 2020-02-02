@@ -1,0 +1,109 @@
+/*
+* add additional plugins, tasks, classes, etc...
+* and make them available for use in the rest of
+* the build script.
+*
+* Note: without a buildscript block you can use
+* everything that ships with gradle out-of-the-box.
+*/
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61'
+    }
+}
+
+/*
+* The plugins block does two things
+*
+* 1) resolves the correct version of the plugin
+* 2) applies the plugin to the target, in our case
+*    the target is the project
+*/
+plugins {
+    // spring boot 2.0 plugin
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+
+    // plugin that provides maven like dependency management
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+
+    // adds java compilation, testing and bundling capabilities
+    // plugin adds a number of additional tasks to the project
+    // like:
+    //      1) compileJava
+    //      2) compileTestJava
+    //      3) classes
+    //      4) testClasses
+    //      ...
+    id 'java'
+
+    // needed to build Kotlin code
+    id "org.jetbrains.kotlin.jvm" version "1.3.61"
+
+    // a wrapper around the all-open kotlin plugin
+    // it is needed because spring needs to be able to subclass
+    // and Kotlin classes are final by default.
+    id "org.jetbrains.kotlin.plugin.spring" version "1.3.61"
+}
+
+// this is the groupId of the project
+group = 'org.panda'
+
+// this is the version of the project
+version = '0.0.1-SNAPSHOT'
+
+// Java version compatibility to use when compiling Java source.
+sourceCompatibility = '1.8'
+
+// configures spring boot devtools
+// which enables tools like application
+// reloads when app code has changed.
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+// used to configure the way dependencies are resolved.
+repositories {
+    mavenCentral()
+}
+
+// dependencies defined for this project
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Kotlin standard libraries extended version for jdk8
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // Kotlin reflection libraries
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
+
+    // Kotlin standard library that targets jdk6 and above
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.61"
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+/*
+* configures the compiler to generate jdk 1.8 compatible
+*  bytecode for both classes and test classes
+*/
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+// enable the JUnit Platform
+test {
+    useJUnitPlatform()
+}
