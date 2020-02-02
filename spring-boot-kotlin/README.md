@@ -1,5 +1,5 @@
 # Spring Boot 2.0 and Kotlin
-This repository can be used as a shell project for a Spring Boot 2.0 appliction configured with Kotlin.
+This repository can serve as a basic shell project for a Spring Boot 2.0 application configured with Kotlin.
 
 It contains the configuration needed to enable this in the gradle.build file.
 
