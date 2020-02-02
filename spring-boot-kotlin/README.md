@@ -19,4 +19,20 @@ org.panda.springbootkotlin.HelloController
 * gradle 5.0 or above
 
 
-You can clone this repository
+You can clone this repository and run the below gradle command:
+```jshelllanguage
+./gradlew bootRun
+```
+
+
+This will start an http server on port 8080.
+
+You can then run the following curl command: 
+```jshelllanguage
+curl http://localhost:8080/hello
+```
+
+This should produce the followig response: 
+```json
+{"greeting":"Hello!"}
+```
