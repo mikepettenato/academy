@@ -1,0 +1,17 @@
+.dropzone-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align:center
+}
+
+.dropzone {
+    border: solid;
+    border-color: blueviolet;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.image {
+    text-align: center;
+}
