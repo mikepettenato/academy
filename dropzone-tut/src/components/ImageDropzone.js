@@ -46,10 +46,12 @@ const ImageDropzone = () => {
     //                 element.  These properties are needed
     //                 to support the dropzone's click and
     //                 drag events.
-    const {getRootProps, getInputProps, acceptedFiles, rejectedFiles} =
+    const {getRootProps, getInputProps,
+        acceptedFiles, rejectedFiles} =
         useDropzone({
             onDrop,
-            accept: 'image/*'
+            accept: 'image/*',
+            multiple: false
         })
 
     const isAcceptedFiles = acceptedFiles.length > 0
